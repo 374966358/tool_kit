@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建新的拜年贴</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.huangwx.cn/css/sweetalert.css">
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+</head>
+<style>
+    @font-face{
+        font-family: "font";
+        src:url("/static/Year/fonts/font.ttf")
+    }
+
+    body{
+        font-family:font;
+        color: #ffc107;
+    }
+    .form-control:focus{
+        border-color:#fff;
+        webkit-box-shadow:none;
+        box-shadow:none;
+    }
+</style>
+<body style="background-image: url('https://qiniu.18x6.com/year_bj2.png')">
+    <div class="container">
+        <div style="text-align: center;padding: 1rem;"><h2>创建拜年贴</h2></div>
+
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span  for="alias" class="input-group-text text-white" id="basic-addon1" style="background: url('https://qiniu.18x6.com/year_bj2.png')">别名</span>
+                </div>
+                <input type="text" class="form-control border-0" id="alias" placeholder="区分多个拜年贴哦(最多15字)" >
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span  for="title" class="input-group-text text-white" id="basic-addon1" style="background: url('https://qiniu.18x6.com/year_bj2.png')">标题</span>
+                </div>
+                <input type="text" class="form-control" id="title" placeholder="谁对谁的祝福(最多15字)" >
+            </div>
+
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span  for="content" class="input-group-text text-white" style="background: url('https://qiniu.18x6.com/year_bj2.png')">祝福</span>
+                </div>
+                <textarea class="form-control" id="content" rows="5" maxlength="150"  placeholder="要表达的祝福(最多150字)"></textarea>
+            </div>
+            <div style="padding: 1rem 0">
+                <button type="button" class="btn btn-outline-warning" style="width: 100%;color: #ffffff;font-size: 18px" data-toggle="modal" data-target="#blessingWordModel">可以直接选择祝福语修改</button>
+            </div>
+            <div class="form-group row text-center">
+                <div class="col-4">
+                    <button type="button" class="btn btn-outline-warning" style="width: 100%;color: #ffffff;font-size: 18px;height: 80px" data-toggle="modal" data-target="#backgroundModel">选择背景图</button>
+                </div>
+                <div class="col-8">
+                    <img id="backImgBg" data-toggle="modal" data-target="#backgroundModel" bgsrc="https://qiniu.18x6.com/year_bj3.png" style="background: url('https://qiniu.18x6.com/year_bj3.png');width: 100%;height: 80px;border: solid 5px #ffffff;border-radius:5px;background-color:#ffffff;">
+                </div>
+            </div>
+            <div class="form-group row text-center">
+                <div class="col-6">
+                    <button type="button" class="btn btn-outline-warning" style="width: 100%;color: #ffffff;font-size: 18px" data-toggle="modal" data-target="#fuModel">选择福字</button>
+                    <div class="pt-2">
+                        <img class="img-fluid img-thumbnail rounded mx-auto d-block img-fluid" data-toggle="modal" data-target="#fuModel" id="fuImg" style="width: 110px;height: 110px;">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <button type="button" class="btn btn-outline-warning" style="width: 100%;color: #ffffff;font-size: 18px" onclick="document.getElementById('blessingImg').click();">上传祝福图</button>
+                    <input type="file" id="blessingImg" class="d-none" accept="image/*"/>
+                    <div class="pt-2">
+                        <img class="img-fluid img-thumbnail rounded mx-auto d-block img-fluid" id="blessImg" style="width: 110px;height: 110px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row text-center">
+                <div class="col-5">
+                    <a id="eyeAll" style="width: 90%;background-color: #f7f7f7" class="btn btn-outline-danger">看全部</a>
+                </div>
+                <div class="col-7">
+                    <button style="width: 90%;background-color: #f7f7f7;color: #dc3545;" id="submit" class="btn btn-outline-danger">提交我的拜年贴</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="blessingWordModel" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="blessingWordModelLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    祝福词
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        {{range $v := .blessing}}
+                            <a class="list-group-item list-group-item-action" onclick="blessingText({{$v}})">{{$v}}</a>
+                        {{end}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="backgroundModel" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="backgroundModelLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    背景图
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        {{range $v := .background}}
+                            <img class="img-fluid img-thumbnail rounded mx-auto d-block" onclick="backgroundImage({{$v}})" style="background: url({{$v}});width: 100%;height: 15rem;">
+                        {{end}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="fuModel" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="fuModelLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    福字
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        {{range $v := .fu}}
+                            <img src="{{$v}}" class="img-fluid img-thumbnail rounded mx-auto d-block" onclick="fuImage({{$v}})" style="width: 100%;height: 15rem;">
+                        {{end}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://www.huangwx.cn/js/sweetalert-dev.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qiniu-js/3.1.1/qiniu.min.js"></script>
+    <script src="/static/Year/js/add.js"></script>
+</body>
+</html>

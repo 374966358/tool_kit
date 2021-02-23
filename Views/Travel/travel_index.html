@@ -1,0 +1,99 @@
+{{template "header" .}}
+    <div class="container">
+        <div class="row justify-content-between pt-4" style="margin: 1rem">
+            <div class="col-5 shadow p-3 mb-1 bg-white rounded">
+                <foote style="color: #5d5d5d91">出发城市</foote>
+                <h4 id="leftCurrency" style="cursor: pointer;">北京</h4>
+                <span class="badge text-wrap border border-success font-weight-bold" id="from_tag"></span>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-5 shadow p-3 mb-1 bg-white rounded">
+                <foote style="color: #5d5d5d91">目的地城市</foote>
+                <h4 id="rightCurrency" style="cursor: pointer;">其它城市</h4>
+                <span class="badge text-wrap border border-success font-weight-bold" id="to_tag"></span>
+            </div>
+        </div>
+    </div>
+    <div class="container justify-content-between col-xl-5 col-sm-12" style="text-align: center">
+{{/*        <span style="position: absolute">广告</span>*/}}
+        {{/*<a href="/yue">
+            <img src="https://financial.wjfdm.com/travel_banner1.png" style="width: 100%;height: auto">
+        </a>*/}}
+    </div>
+    <div class="container">
+        <div class="row" style="margin: 1rem">
+            <div class="shadow p-3 mb-5 bg-white rounded mb-4  col-xl-5 col-sm-12" >
+                <div>
+                    <h5 class="card-title border-bottom font-weight-bold p-2">离开<span id="from_title"></span></h5>
+                    <p class="card-text" id="from_data"></p>
+                    <p class="border-bottom pb-1 text-black-50" style="font-size: .8rem;" id="from_footer"></p>
+                </div>
+                <div class="d-none flex-wrap align-baseline" id="fromTel">
+                    <div>
+                        <img src="https://cdn.sm.cn/static/21/01/29/8dc9f667162f51cfb9c813170ab017c6.png" style="width: 18px;cursor: pointer;">
+                        当地疾控电话
+                    </div>
+                    <div class="ml-auto">
+                        <img src="https://cdn.sm.cn/static/21/01/29/4917ac0fd1f0a0e21d6d209f201ffa4a.png" style="width: 4px">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2"></div>
+            <div class="shadow p-3 mb-5 bg-white rounded mb-4 col-xl-5 col-sm-12" >
+                <div>
+                    <h5 class="card-title border-bottom font-weight-bold p-2">进入<span id="to_title"></span></h5>
+                    <p class="card-text font-weight-light" id="to_data"></p>
+                    <p class="border-bottom pb-1 text-black-50" style="font-size: .8rem;" id="to_footer"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="container justify-content-between col-xl-5 col-sm-12" style="text-align: center">
+{{/*    <span style="position: absolute">广告</span>*/}}
+    {{/*<a href="/yue">
+        <img src="https://financial.wjfdm.com/travel_banner2.png" style="width: 100%;height: auto">
+    </a>*/}}
+</div>
+{{/*    <div class="container pt-5">*/}}
+{{/*        <h3>累计确诊人数如下：</h3>*/}}
+{{/*        <!--为echarts准备一个dom容器-->*/}}
+{{/*        <div id="myEcharts" style="width: 100%;height: 50rem;"></div>*/}}
+{{/*    </div>*/}}
+
+    <!-- Modal -->
+    <div class="modal fade h-100" id="currencyModel" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <header>
+                    <div class="title">选择城市</div>
+                    <div class="icon_container">
+                        <i class="iconfont icon-close" id="currencyClose"></i>
+                    </div>
+                </header>
+                <div class="index_selection_page_container" style="height: 42.5rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade h-100" id="telModel" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <header>
+                    <div class="title">防疫站电话</div>
+                    <div class="icon_container">
+                        <i class="iconfont icon-close" id="telClose"></i>
+                    </div>
+                </header>
+                <div style="height: 42.5rem;overflow: hidden;overflow-y: auto;" id="telContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" value="北京" id="FromP"/>
+    <input type="hidden" value="北京" id="FromC"/>
+    <input type="hidden" value="" id="ToP"/>
+    <input type="hidden" value="" id="ToC"/>
+{{template "footer" .}}
+
+<script src="/static/Travel/js/city.js"></script>
+<script src="/static/Travel/js/base.js?v1.5"></script>

@@ -1,0 +1,69 @@
+{{define "wage/header"}}
+
+<!doctype html>
+<html lang="zh">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>工资计算器</title>
+    <meta name="keywords" content="全国工资计算器,北京工资计算,上海工资计算,广州工资计算,深圳工资计算,辽宁工资计算,河北工资计算,浙江工资计算,杭州工资计算,南京工资计算">
+    <meta name="description" content="全国各地工资计算器，可根据需求调整基数">
+
+</head>
+<style>
+    .thead{color: white;
+        background-color: #4991f9;}
+    @media (min-width: 768px) {
+        .form-horizontal .control-label {
+            text-align: right;
+            margin-bottom: 0;
+            padding-top: 7px;
+        }
+    }
+    a{color: white;}
+    a:hover{color: aqua}
+    .form-horizontal{margin-left: -1rem}
+    .city_link{ padding-top: 2rem}
+    .city_link span{padding: 1rem}
+</style>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/">工资计算器</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">北京</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">切换城市</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link " href="#">个税计算</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">个税新规</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">五险一金</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">劳动法</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{{end}}

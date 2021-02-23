@@ -1,0 +1,8 @@
+db:
+  name: ciming
+  host: 47.57.146.4
+  user: luchunyu
+  pass: Luchunyu870529
+  maxidleconns: 8
+  maxopenconns: 16
+  maxlifetime: 120
